@@ -1,0 +1,26 @@
+{
+  "name": "@evie-ui/hooks",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "bun run build.ts",
+    "clean": "rimraf dist",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "devDependencies": {
+    "@evie-ui/typescript-config": "*"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "@evie-ui/utils": "*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "react-native": "./dist/index.js",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  }
+}

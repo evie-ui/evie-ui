@@ -1,0 +1,254 @@
+{
+  "name": "@evie-ui/components",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "bun run build.ts",
+    "clean": "rimraf dist",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "devDependencies": {
+    "@evie-ui/typescript-config": "*"
+  },
+  "peerDependencies": {
+    "@evie-ui/hooks": "*",
+    "@evie-ui/utils": "*",
+    "@evie-ui/types": "*",
+    "@evie-ui/icons": "*",
+    "expo-image": "*",
+    "react-native": "*",
+    "expo-haptics": "*",
+    "expo-navigation-bar": "*",
+    "expo-linear-gradient": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-reanimated": "*",
+    "react-native-svg": "*",
+    "react-native-safe-area-context": "*",
+    "react-native-keyboard-controller": "*",
+    "@expensify/react-native-live-markdown": "*"
+  },
+  "exports": {
+    "./accordion": {
+      "types": "./dist/components/accordion/index.d.ts",
+      "react-native": "./dist/components/accordion/index.js",
+      "import": "./dist/components/accordion/index.js",
+      "require": "./dist/components/accordion/index.js"
+    },
+    "./avatar": {
+      "types": "./dist/components/avatar/index.d.ts",
+      "react-native": "./dist/components/avatar/index.js",
+      "import": "./dist/components/avatar/index.js",
+      "require": "./dist/components/avatar/index.js"
+    },
+    "./bottom-sheet": {
+      "types": "./dist/components/bottom-sheet/index.d.ts",
+      "react-native": "./dist/components/bottom-sheet/index.js",
+      "import": "./dist/components/bottom-sheet/index.js",
+      "require": "./dist/components/bottom-sheet/index.js"
+    },
+    "./calendar": {
+      "types": "./dist/components/calendar/index.d.ts",
+      "react-native": "./dist/components/calendar/index.js",
+      "import": "./dist/components/calendar/index.js",
+      "require": "./dist/components/calendar/index.js"
+    },
+    "./card": {
+      "types": "./dist/components/card/index.d.ts",
+      "react-native": "./dist/components/card/index.js",
+      "import": "./dist/components/card/index.js",
+      "require": "./dist/components/card/index.js"
+    },
+    "./carousel": {
+      "types": "./dist/components/carousel/index.d.ts",
+      "react-native": "./dist/components/carousel/index.js",
+      "import": "./dist/components/carousel/index.js",
+      "require": "./dist/components/carousel/index.js"
+    },
+    "./chip": {
+      "types": "./dist/components/chip/index.d.ts",
+      "react-native": "./dist/components/chip/index.js",
+      "import": "./dist/components/chip/index.js",
+      "require": "./dist/components/chip/index.js"
+    },
+    "./collapsible": {
+      "types": "./dist/components/collapsible/index.d.ts",
+      "react-native": "./dist/components/collapsible/index.js",
+      "import": "./dist/components/collapsible/index.js",
+      "require": "./dist/components/collapsible/index.js"
+    },
+    "./form-control": {
+      "types": "./dist/components/form-control/index.d.ts",
+      "react-native": "./dist/components/form-control/index.js",
+      "import": "./dist/components/form-control/index.js",
+      "require": "./dist/components/form-control/index.js"
+    },
+    "./icon": {
+      "types": "./dist/components/icon/index.d.ts",
+      "react-native": "./dist/components/icon/index.js",
+      "import": "./dist/components/icon/index.js",
+      "require": "./dist/components/icon/index.js"
+    },
+    "./icon-button": {
+      "types": "./dist/components/icon-button/index.d.ts",
+      "react-native": "./dist/components/icon-button/index.js",
+      "import": "./dist/components/icon-button/index.js",
+      "require": "./dist/components/icon-button/index.js"
+    },
+    "./image": {
+      "types": "./dist/components/image/index.d.ts",
+      "react-native": "./dist/components/image/index.js",
+      "import": "./dist/components/image/index.js",
+      "require": "./dist/components/image/index.js"
+    },
+    "./input": {
+      "types": "./dist/components/input/index.d.ts",
+      "react-native": "./dist/components/input/index.js",
+      "import": "./dist/components/input/index.js",
+      "require": "./dist/components/input/index.js"
+    },
+    "./list": {
+      "types": "./dist/components/list/index.d.ts",
+      "react-native": "./dist/components/list/index.js",
+      "import": "./dist/components/list/index.js",
+      "require": "./dist/components/list/index.js"
+    },
+    "./link": {
+      "types": "./dist/components/link/index.d.ts",
+      "react-native": "./dist/components/link/index.js",
+      "import": "./dist/components/link/index.js",
+      "require": "./dist/components/link/index.js"
+    },
+    "./modal": {
+      "types": "./dist/components/modal/index.d.ts",
+      "react-native": "./dist/components/modal/index.js",
+      "import": "./dist/components/modal/index.js",
+      "require": "./dist/components/modal/index.js"
+    },
+    "./multi-step": {
+      "types": "./dist/components/multi-step/index.d.ts",
+      "react-native": "./dist/components/multi-step/index.js",
+      "import": "./dist/components/multi-step/index.js",
+      "require": "./dist/components/multi-step/index.js"
+    },
+    "./page": {
+      "types": "./dist/components/page/index.d.ts",
+      "react-native": "./dist/components/page/index.js",
+      "import": "./dist/components/page/index.js",
+      "require": "./dist/components/page/index.js"
+    },
+    "./pressable": {
+      "types": "./dist/components/pressable/index.d.ts",
+      "react-native": "./dist/components/pressable/index.js",
+      "import": "./dist/components/pressable/index.js",
+      "require": "./dist/components/pressable/index.js"
+    },
+    "./progress-bar": {
+      "types": "./dist/components/progress-bar/index.d.ts",
+      "react-native": "./dist/components/progress-bar/index.js",
+      "import": "./dist/components/progress-bar/index.js",
+      "require": "./dist/components/progress-bar/index.js"
+    },
+    "./progress-circle": {
+      "types": "./dist/components/progress-circle/index.d.ts",
+      "react-native": "./dist/components/progress-circle/index.js",
+      "import": "./dist/components/progress-circle/index.js",
+      "require": "./dist/components/progress-circle/index.js"
+    },
+    "./section": {
+      "types": "./dist/components/section/index.d.ts",
+      "react-native": "./dist/components/section/index.js",
+      "import": "./dist/components/section/index.js",
+      "require": "./dist/components/section/index.js"
+    },
+    "./segmented-control": {
+      "types": "./dist/components/segmented-control/index.d.ts",
+      "react-native": "./dist/components/segmented-control/index.js",
+      "import": "./dist/components/segmented-control/index.js",
+      "require": "./dist/components/segmented-control/index.js"
+    },
+    "./separator": {
+      "types": "./dist/components/separator/index.d.ts",
+      "react-native": "./dist/components/separator/index.js",
+      "import": "./dist/components/separator/index.js",
+      "require": "./dist/components/separator/index.js"
+    },
+    "./slider": {
+      "types": "./dist/components/slider/index.d.ts",
+      "react-native": "./dist/components/slider/index.js",
+      "import": "./dist/components/slider/index.js",
+      "require": "./dist/components/slider/index.js"
+    },
+    "./status-bar": {
+      "types": "./dist/components/status-bar/index.d.ts",
+      "react-native": "./dist/components/status-bar/index.js",
+      "import": "./dist/components/status-bar/index.js",
+      "require": "./dist/components/status-bar/index.js"
+    },
+    "./stepper": {
+      "types": "./dist/components/stepper/index.d.ts",
+      "react-native": "./dist/components/stepper/index.js",
+      "import": "./dist/components/stepper/index.js",
+      "require": "./dist/components/stepper/index.js"
+    },
+    "./switch": {
+      "types": "./dist/components/switch/index.d.ts",
+      "react-native": "./dist/components/switch/index.js",
+      "import": "./dist/components/switch/index.js",
+      "require": "./dist/components/switch/index.js"
+    },
+    "./text": {
+      "types": "./dist/components/text/index.d.ts",
+      "react-native": "./dist/components/text/index.js",
+      "import": "./dist/components/text/index.js",
+      "require": "./dist/components/text/index.js"
+    },
+    "./scrollview": {
+      "types": "./dist/components/scrollview/index.d.ts",
+      "react-native": "./dist/components/scrollview/index.js",
+      "import": "./dist/components/scrollview/index.js",
+      "require": "./dist/components/scrollview/index.js"
+    },
+    "./text-button": {
+      "types": "./dist/components/text-button/index.d.ts",
+      "react-native": "./dist/components/text-button/index.js",
+      "import": "./dist/components/text-button/index.js",
+      "require": "./dist/components/text-button/index.js"
+    },
+    "./view": {
+      "types": "./dist/components/view/index.d.ts",
+      "react-native": "./dist/components/view/index.js",
+      "import": "./dist/components/view/index.js",
+      "require": "./dist/components/view/index.js"
+    },
+    "./provider": {
+      "types": "./dist/provider/index.d.ts",
+      "react-native": "./dist/provider/index.js",
+      "import": "./dist/provider/index.js",
+      "require": "./dist/provider/index.js"
+    },
+    "./magic-modal": {
+      "types": "./dist/components/magic-modal/index.d.ts",
+      "react-native": "./dist/components/magic-modal/index.js",
+      "import": "./dist/components/magic-modal/index.js",
+      "require": "./dist/components/magic-modal/index.js"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "react-native": "./dist/theme/index.js",
+      "import": "./dist/theme/index.js",
+      "require": "./dist/theme/index.js"
+    },
+    "./extend-theme": {
+      "types": "./dist/extend-theme/index.d.ts",
+      "react-native": "./dist/extend-theme/index.js",
+      "import": "./dist/extend-theme/index.js",
+      "require": "./dist/extend-theme/index.js"
+    },
+    "./_experimental": {
+      "types": "./dist/_experimental/index.d.ts",
+      "react-native": "./dist/_experimental/index.js",
+      "import": "./dist/_experimental/index.js",
+      "require": "./dist/_experimental/index.js"
+    }
+  }
+}

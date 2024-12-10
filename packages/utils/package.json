@@ -1,0 +1,103 @@
+{
+  "name": "@evie-ui/utils",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "bun run build.ts",
+    "clean": "rimraf dist",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "devDependencies": {
+    "@evie-ui/typescript-config": "*"
+  },
+  "dependencies": {
+    "@fastify/deepmerge": "2.0.0",
+    "@evie-ui/types": "*"
+  },
+  "exports": {
+    "./errors": {
+      "types": "./dist/errors/index.d.ts",
+      "react-native": "./dist/errors/index.js",
+      "import": "./dist/errors/index.js",
+      "require": "./dist/errors/index.js"
+    },
+    "./array": {
+      "types": "./dist/utils/array.d.ts",
+      "react-native": "./dist/utils/array.js",
+      "import": "./dist/utils/array.js",
+      "require": "./dist/utils/array.js"
+    },
+    "./color": {
+      "types": "./dist/utils/color.d.ts",
+      "react-native": "./dist/utils/color.js",
+      "import": "./dist/utils/color.js",
+      "require": "./dist/utils/color.js"
+    },
+    "./currency": {
+      "types": "./dist/utils/currency.d.ts",
+      "react-native": "./dist/utils/currency.js",
+      "import": "./dist/utils/currency.js",
+      "require": "./dist/utils/currency.js"
+    },
+    "./file": {
+      "types": "./dist/utils/file.d.ts",
+      "react-native": "./dist/utils/file.js",
+      "import": "./dist/utils/file.js",
+      "require": "./dist/utils/file.js"
+    },
+    "./map": {
+      "types": "./dist/utils/map.d.ts",
+      "react-native": "./dist/utils/map.js",
+      "import": "./dist/utils/map.js",
+      "require": "./dist/utils/map.js"
+    },
+    "./mask": {
+      "types": "./dist/utils/mask.d.ts",
+      "react-native": "./dist/utils/mask.js",
+      "import": "./dist/utils/mask.js",
+      "require": "./dist/utils/mask.js"
+    },
+    "./number": {
+      "types": "./dist/utils/number.d.ts",
+      "react-native": "./dist/utils/number.js",
+      "import": "./dist/utils/number.js",
+      "require": "./dist/utils/number.js"
+    },
+    "./object": {
+      "types": "./dist/utils/object.d.ts",
+      "react-native": "./dist/utils/object.js",
+      "import": "./dist/utils/object.js",
+      "require": "./dist/utils/object.js"
+    },
+    "./promise": {
+      "types": "./dist/utils/promise.d.ts",
+      "react-native": "./dist/utils/promise.js",
+      "import": "./dist/utils/promise.js",
+      "require": "./dist/utils/promise.js"
+    },
+    "./switch": {
+      "types": "./dist/utils/switch.d.ts",
+      "react-native": "./dist/utils/switch.js",
+      "import": "./dist/utils/switch.js",
+      "require": "./dist/utils/switch.js"
+    },
+    "./string": {
+      "types": "./dist/utils/string.d.ts",
+      "react-native": "./dist/utils/string.js",
+      "import": "./dist/utils/string.js",
+      "require": "./dist/utils/string.js"
+    },
+    "./theme": {
+      "types": "./dist/utils/theme.d.ts",
+      "react-native": "./dist/utils/theme.js",
+      "import": "./dist/utils/theme.js",
+      "require": "./dist/utils/theme.js"
+    },
+    "./date": {
+      "types": "./dist/utils/date/index.d.ts",
+      "react-native": "./dist/utils/date/index.js",
+      "import": "./dist/utils/date/index.js",
+      "require": "./dist/utils/date/index.js"
+    }
+  }
+}

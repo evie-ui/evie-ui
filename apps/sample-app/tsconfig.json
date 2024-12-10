@@ -1,0 +1,9 @@
+{
+  "extends": "@evie-ui/typescript-config/expo-app",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
+}

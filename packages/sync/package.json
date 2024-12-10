@@ -1,0 +1,30 @@
+{
+  "name": "@evie-ui/sync",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "bun run build.ts",
+    "clean": "rimraf dist",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "devDependencies": {
+    "@evie-ui/typescript-config": "*"
+  },
+  "peerDependencies": {
+    "@fastify/deepmerge": "*",
+    "react-native-mmkv": "*",
+    "expo-background-fetch": "*",
+    "react": "*",
+    "expo": "*",
+    "react-native": "*",
+    "@evie-ui/utils": "*",
+    "@evie-ui/types": "*"
+  },
+  "exports": {
+    ".": {
+      "types": "./build/src/index.js",
+      "import": "./build/src/index.js",
+      "require": "./build/src/index.js"
+    }
+  }
+}
