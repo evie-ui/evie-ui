@@ -1,8 +1,0 @@
-{
-  "extends": "@evie-ui/typescript-config/react-native-library",
-  "include": ["."],
-  "exclude": ["dist","node_modules"],
-  "compilerOptions": {
-    "strict": true
-  }
-}
