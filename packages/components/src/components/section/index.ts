@@ -4,7 +4,7 @@ import { SectionHeader } from "./fragments/header";
 import { SectionRoot } from "./fragments/root";
 import { SectionSubtitle } from "./fragments/subtitle";
 import { SectionTitle } from "./fragments/title";
-import { SectionTitleSubtitleContainer } from "./fragments/title-subtitle-container";
+import { SectionTitleContainer } from "./fragments/title-subtitle-container";
 
 export const Section = {
   Root: SectionRoot,
@@ -13,5 +13,5 @@ export const Section = {
   Title: SectionTitle,
   Subtitle: SectionSubtitle,
   Action: SectionAction,
-  TitleSubtitleContainer: SectionTitleSubtitleContainer,
+  TitleContainer: SectionTitleContainer,
 };

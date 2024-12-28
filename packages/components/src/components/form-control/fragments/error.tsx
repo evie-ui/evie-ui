@@ -8,14 +8,7 @@ type Props = React.ComponentProps<typeof Text> & { name: string };
 export const FormControlError = (_props: Props) => {
   const { invalid } = useContext(FormControlContext);
 
-  const props = useComponentDefaults(_props, {
-    fontSize: "caption",
-    textAlign: "right",
-    fontWeight: "bold",
-    color: "error",
-    mt: "xs",
-    mr: "sm",
-  });
+  const props = useComponentDefaults((t) => t.FormControl?.Error, _props);
 
   if (props.name !== invalid) return null;
   return <Text {...props}>{props.children}</Text>;

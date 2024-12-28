@@ -1,7 +1,11 @@
 import { NumberHelpers } from "@evie-ui/utils/number";
 import { useCallback } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { useAnimatedReaction, useSharedValue, withSpring } from "react-native-reanimated";
+import {
+  useAnimatedReaction,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { useComponentDefaults } from "../../../theme";
 import { View } from "../../view";
 import { CollapsibleContext } from "../_context";
@@ -15,21 +19,26 @@ type Props = React.ComponentProps<typeof View> & {
 const GESTURE_PAN_THRESHOLD = 20;
 
 export const CollapsibleRootFragment = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Collapsible?.Root, _props, {
     defaultOpen: false,
     enableGesture: false,
-    overflow: "hidden",
   });
 
   const context = useSharedValue(0);
   const contentHeight = useSharedValue(0);
-  const translateY = useSharedValue(props.defaultOpen ? contentHeight.value : 0);
+  const translateY = useSharedValue(
+    props.defaultOpen ? contentHeight.value : 0
+  );
 
   const goToTop = useCallback(() => {
     "worklet";
-    translateY.value = withSpring(0, { dampingRatio: 0.75, clamp: { min: 0 } }, () => {
-      props.onOpenChange?.(false);
-    });
+    translateY.value = withSpring(
+      0,
+      { dampingRatio: 0.75, clamp: { min: 0 } },
+      () => {
+        props.onOpenChange?.(false);
+      }
+    );
   }, [props.onOpenChange, translateY]);
 
   const goToBottom = useCallback(() => {
@@ -39,7 +48,7 @@ export const CollapsibleRootFragment = (_props: Props) => {
       { dampingRatio: 0.5, clamp: { max: contentHeight.value } },
       () => {
         props.onOpenChange?.(true);
-      },
+      }
     );
   }, [props.onOpenChange, translateY, contentHeight]);
 
@@ -51,7 +60,7 @@ export const CollapsibleRootFragment = (_props: Props) => {
       } else {
         goToBottom();
       }
-    },
+    }
   );
 
   const gesture = Gesture.Pan()
@@ -60,13 +69,18 @@ export const CollapsibleRootFragment = (_props: Props) => {
       context.value = translateY.value;
     })
     .onUpdate((event) => {
-      translateY.value = NumberHelpers.clamp(event.translationY + context.value, {
-        min: 0,
-        max: contentHeight.value,
-      });
+      translateY.value = NumberHelpers.clamp(
+        event.translationY + context.value,
+        {
+          min: 0,
+          max: contentHeight.value,
+        }
+      );
     })
     .onEnd((event) => {
-      const threshold = NumberHelpers.clamp(GESTURE_PAN_THRESHOLD, { max: contentHeight.value / 3 });
+      const threshold = NumberHelpers.clamp(GESTURE_PAN_THRESHOLD, {
+        max: contentHeight.value / 3,
+      });
 
       if (NumberHelpers.isPositive(event.translationY)) {
         event.translationY > threshold ? goToBottom() : goToTop();
@@ -78,7 +92,7 @@ export const CollapsibleRootFragment = (_props: Props) => {
   return (
     <CollapsibleContext.Provider value={{ contentHeight, translateY }}>
       <GestureDetector gesture={gesture}>
-        <View {...props} />
+        <View {...props} overflow="hidden" />
       </GestureDetector>
     </CollapsibleContext.Provider>
   );

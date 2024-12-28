@@ -4,7 +4,7 @@ import { Text } from "../../text";
 type Props = React.ComponentProps<typeof Text>;
 
 export const CardTitle = (_props: Props) => {
-  const props = useComponentDefaults(_props, { fontWeight: "bold", fontSize: "section-title" });
+  const props = useComponentDefaults((t) => t.Card?.Title, _props);
 
   return <Text {...props} />;
 };

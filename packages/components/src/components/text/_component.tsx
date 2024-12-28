@@ -17,19 +17,9 @@ import {
   type TextPropsType,
   type ThemeWithGetToken,
   type ZIndexPropsType,
-  backgroundProps,
-  borderProps,
-  dimensionProps,
-  flexProps,
-  opacityProps,
-  overflowProps,
-  positionProps,
-  roundedProps,
-  spacingProps,
   textProps,
   useComponentDefaults,
   useTheme,
-  zIndexProps,
 } from "../../theme";
 import { TextComponentContext } from "./_context";
 import type { TextBaseComponentProps, TextProps } from "./_types";
@@ -208,20 +198,19 @@ const parseTextPropsType = <Props extends TextPropsType>(
   theme: ThemeWithGetToken
 ): Partial<TextBaseComponentProps> => {
   const fontSize = theme.getFontSize(props.fontSize)!;
+  const fontWeight = props.fontWeight ?? "regular";
+  const fontFamily = theme.getFontFamily(props.fontFamily, fontWeight);
 
   return {
     style: {
-      color: theme.getColor(props.color),
+      fontFamily,
       fontSize,
+      color: theme.getColor(props.color),
+      fontWeight: theme.getFontWeight(fontWeight),
       fontStyle: props.fontStyle,
       letterSpacing: props.letterSpacing,
       textAlignVertical: props.textAlignVertical,
-      fontWeight: "regular",
       textTransform: props.textTransform,
-      fontFamily: theme.getFontFamily(
-        props.fontFamily,
-        props.fontWeight ?? "regular"
-      ),
       textAlign: props.textAlign,
       textDecorationLine: props.textDecorationLine,
       textDecorationStyle: props.textDecorationStyle,
@@ -239,17 +228,7 @@ export const Text = forwardRef<RNText, TextProps>(
     const { theme } = useTheme();
     const parentTextProps = useContext(TextComponentContext);
 
-    const props = useComponentDefaults(
-      _props,
-      {
-        fontSize: "body",
-        color: "onBackground",
-        fontFamily: "body",
-        fontWeight: "regular",
-        textAlignVertical: "center",
-      },
-      parentTextProps
-    );
+    const props = useComponentDefaults((t) => t.Text, _props, parentTextProps);
 
     const parsedBackgroundProps = parseBackgroundPropsType(props, theme);
     const parsedBorderProps = parseBorderPropsType(props, theme);
@@ -262,20 +241,6 @@ export const Text = forwardRef<RNText, TextProps>(
     const parsedSpacingProps = parseSpacingPropsType(props, theme);
     const parsedZIndexProps = parseZIndexPropsType(props, theme);
     const parsedTextProps = parseTextPropsType(props, theme);
-
-    objectExtractKeysAndDeleteFromOriginal(
-      props,
-      ...backgroundProps,
-      ...flexProps,
-      ...borderProps,
-      ...dimensionProps,
-      ...opacityProps,
-      ...overflowProps,
-      ...positionProps,
-      ...roundedProps,
-      ...spacingProps,
-      ...zIndexProps
-    );
 
     const _textProps = objectExtractKeysAndDeleteFromOriginal(
       props,

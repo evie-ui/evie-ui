@@ -8,14 +8,7 @@ type Props = React.ComponentProps<typeof Text>;
 export const FormControlHelper = ({ children, ..._props }: Props) => {
   const { invalid } = useContext(FormControlContext);
 
-  const props = useComponentDefaults(_props, {
-    fontSize: "caption",
-    fontWeight: "semibold",
-    color: "onBackgroundVariant",
-    textAlign: "right",
-    mt: "xs",
-    mr: "sm",
-  });
+  const props = useComponentDefaults((t) => t.FormControl?.Helper, _props);
 
   if (invalid) return null;
 

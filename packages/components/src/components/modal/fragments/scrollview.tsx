@@ -1,10 +1,19 @@
 import { useScrollPercentage } from "@evie-ui/hooks";
-import { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
+import {
+  forwardRef,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { useComponentDefaults } from "../../../theme";
 import { ScrollView } from "../../scrollview";
 import { ModalScrollContext } from "../_context";
 
-type Props = React.ComponentProps<typeof ScrollView> & { showScrollToTopButton?: boolean };
+type Props = React.ComponentProps<typeof ScrollView> & {
+  showScrollToTopButton?: boolean;
+};
 type Ref = {
   scrollToStart: () => void;
   scrollToEnd: () => void;
@@ -16,11 +25,7 @@ export const ModalScrollView = forwardRef<Ref, Props>((_props, ref) => {
   const { handlers, values } = useScrollPercentage();
   const { scroll } = useContext(ModalScrollContext);
   const [contentSize, setContentSize] = useState({ width: 0, height: 0 });
-  const props = useComponentDefaults(_props, {
-    mx: "-xl",
-    px: "lg",
-    pb: "xl",
-  });
+  const props = useComponentDefaults((t) => t.Modal?.ScrollView, _props);
 
   const internalRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   useImperativeHandle(ref, () => ({

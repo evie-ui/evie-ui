@@ -1,4 +1,3 @@
-import { View } from "../view";
 import { PageBackground } from "./fragments/background";
 import { PageContent } from "./fragments/content";
 import { PageFooter } from "./fragments/footer";
@@ -11,11 +10,12 @@ import { PageTitle } from "./fragments/title";
 export const Page = {
   Root: PageRoot,
   Header: PageHeader,
-  Subheader: View,
+  
+  Title: PageTitle,
+  Subtitle: PageSubtitle,
   Content: PageContent,
   Footer: PageFooter,
+
   List: PageList,
-  Title: PageTitle,
   Background: PageBackground,
-  Subtitle: PageSubtitle,
 };

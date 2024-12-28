@@ -49,7 +49,7 @@ export const Slider = (props: Props) => {
         currentXDistance.value,
         [MIN_X, startXDistance.value, MAX_X],
         [0, startingWidth.value, 100],
-        Extrapolation.CLAMP,
+        Extrapolation.CLAMP
       );
 
       const computedValue = Math.round(interpolatedValue) as Progress;
@@ -64,13 +64,18 @@ export const Slider = (props: Props) => {
     return { left: `${clamp(sliderState.value, 0, 100)}%` };
   });
 
-  console.log(startXDistance.value, currentXDistance.value, startingWidth.value, sliderState.value);
+  console.log(
+    startXDistance.value,
+    currentXDistance.value,
+    startingWidth.value,
+    sliderState.value
+  );
 
   return (
     <GestureDetector gesture={panGesture}>
       <View>
         <ProgressBar.Root h={3} progress={props.progress}>
-          <ProgressBar.Progress bgColor="onBlue" />
+          <ProgressBar.Indicator bgColor="onBlue" />
         </ProgressBar.Root>
 
         {/* <AnimatedView

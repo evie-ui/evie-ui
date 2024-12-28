@@ -1,13 +1,13 @@
-import { AccordionContentFragment } from "./fragments/content";
-import { AccordionHeaderFragment } from "./fragments/header";
-import { AccordionIndicatorFragment } from "./fragments/indicator";
-import { AccordionRootFragment } from "./fragments/root";
+import { AccordionRoot } from "./fragments/root";
+import { AccordionContent } from "./fragments/content";
+import { AccordionTrigger } from "./fragments/trigger";
+import { AccordionIndicator } from "./fragments/indicator";
+import { AccordionItem } from "./fragments/item";
 
 export const Accordion = {
-  Root: AccordionRootFragment,
-  Header: AccordionHeaderFragment,
-  Content: AccordionContentFragment,
-  Indicator: AccordionIndicatorFragment,
+  Root: AccordionRoot,
+  Item: AccordionItem,
+  Trigger: AccordionTrigger,
+  Content: AccordionContent,
+  Indicator: AccordionIndicator,
 };
-
-export * from "./_hooks";

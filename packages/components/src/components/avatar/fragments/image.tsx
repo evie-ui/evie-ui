@@ -4,14 +4,14 @@ import { Image } from "../../image";
 import { ProgressCircle } from "../../progress-circle";
 import { View } from "../../view";
 import { AvatarContext } from "../_context";
+import type { AvatarImageProps } from "../types";
 
-type Props = React.ComponentProps<typeof Image>;
-
-export const AvatarImage = (props: Props) => {
+export const AvatarImage = (props: AvatarImageProps) => {
   const { currentState, setCurrentState } = useContext(AvatarContext);
   const [isLoading, setIsLoading] = useState(false);
 
   if (currentState === "fallback") return null;
+
   return (
     <Fragment>
       <Image
@@ -42,12 +42,9 @@ export const AvatarImage = (props: Props) => {
           justifyContent="center"
           alignItems="center"
         >
-          <ProgressCircle
-            size={50}
-            indeterminate
-            color="primary"
-            bgColor="transparent"
-          />
+          <ProgressCircle.Root size={50} indeterminate color="transparent">
+            <ProgressCircle.Indicator color="primary" />
+          </ProgressCircle.Root>
         </View>
       )}
     </Fragment>

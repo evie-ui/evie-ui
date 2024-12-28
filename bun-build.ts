@@ -5,6 +5,8 @@ type Props = {
   entrypoints: string[];
 };
 
+const IS_PROD = process.env.NODE_ENV === "production";
+
 export const build = async (
   { entrypoints }: Props = {
     entrypoints: [],
@@ -12,14 +14,16 @@ export const build = async (
 ) => {
   console.info("Bundling...");
 
-  let output = await Bun.build({
+  if (IS_PROD) await Bun.$`rimraf ./dist`;
+
+  const output = await Bun.build({
     entrypoints,
     outdir: "./dist",
     target: "node",
     format: "esm",
     splitting: true,
-    sourcemap: "external",
-    minify: false,
+    sourcemap: IS_PROD ? "none" : "external",
+    minify: IS_PROD,
     packages: "external",
     root: "./src",
     plugins: [dts],

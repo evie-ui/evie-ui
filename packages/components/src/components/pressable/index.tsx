@@ -2,7 +2,13 @@ import { type Hex, hexToRgbaString } from "@evie-ui/utils/color";
 import { forwardRef } from "react";
 import { StyleSheet } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, { Easing, runOnJS, useSharedValue, withTiming, type WithTimingConfig } from "react-native-reanimated";
+import Animated, {
+  Easing,
+  runOnJS,
+  useSharedValue,
+  withTiming,
+  type WithTimingConfig,
+} from "react-native-reanimated";
 import { useTheme } from "../../theme";
 import { ProgressCircle } from "../progress-circle";
 import { View } from "../view";
@@ -18,10 +24,12 @@ type Props = React.ComponentProps<typeof View> & {
   scaleDownAnimation?: "soft" | "hard" | "none";
 };
 
-const ANIMATION_CONFIG: WithTimingConfig = { easing: Easing.inOut(Easing.ease), duration: 150 };
+const ANIMATION_CONFIG: WithTimingConfig = {
+  easing: Easing.inOut(Easing.ease),
+  duration: 150,
+};
 
 const AnimatedView = Animated.createAnimatedComponent(View);
-const AnimatedProgressCircle = Animated.createAnimatedComponent(ProgressCircle);
 
 export const Pressable = forwardRef<Ref, Props>((props, ref) => {
   const {
@@ -33,6 +41,7 @@ export const Pressable = forwardRef<Ref, Props>((props, ref) => {
     children,
     loading,
     disabled,
+    overflow = "hidden",
     ...rest
   } = props;
   const scaleDownAnimationValue = useSharedValue(1);
@@ -74,10 +83,12 @@ export const Pressable = forwardRef<Ref, Props>((props, ref) => {
       <AnimatedView
         {...rest}
         ref={ref}
-        overflow="hidden"
         opacity={disabled && !loading ? 0.33 : rest.opacity}
         pointerEvents={disabled || loading ? "none" : rest.pointerEvents}
-        style={[{ transform: [{ scale: scaleDownAnimationValue }] }, rest.style]}
+        style={[
+          { transform: [{ scale: scaleDownAnimationValue }] },
+          rest.style,
+        ]}
         onLayout={(event) => {
           height.value = event.nativeEvent.layout.height;
           props.onLayout?.(event);
@@ -86,13 +97,18 @@ export const Pressable = forwardRef<Ref, Props>((props, ref) => {
         {children}
 
         {loading && (
-          <View {...StyleSheet.absoluteFillObject} alignItems="center" justifyContent="center">
-            <AnimatedProgressCircle
-              size={height.value * 0.5}
+          <View
+            {...StyleSheet.absoluteFillObject}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <ProgressCircle.Root
               indeterminate
-              color={props.color}
-              bgColor={hexToRgbaString(theme.getColor(props.color) as Hex, 0.1)}
-            />
+              size={height.value * 0.5}
+              color={hexToRgbaString(theme.getColor(props.color) as Hex, 0.1)}
+            >
+              <ProgressCircle.Indicator color={props.color} />
+            </ProgressCircle.Root>
           </View>
         )}
       </AnimatedView>

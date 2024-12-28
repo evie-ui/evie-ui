@@ -10,7 +10,12 @@ type Props = React.PropsWithChildren & {
   prefix?: React.JSX.Element | null;
 };
 
-export const PrefixSuffix = ({ children, prefix, suffix, ..._props }: Props) => {
+export const PrefixSuffix = ({
+  children,
+  prefix,
+  suffix,
+  ..._props
+}: Props) => {
   const props = _getDefaultProps(_props as TODO);
   const { loading } = useContext(FormControlContext);
 
@@ -23,8 +28,15 @@ export const PrefixSuffix = ({ children, prefix, suffix, ..._props }: Props) => 
       {(loading || suffix) && (
         <View mr="sm">
           {loading ? (
-            <View flexDirection="row" alignItems="center" justifyContent="center" mr="sm">
-              <ProgressCircle indeterminate size={32} bgColor="background" />
+            <View
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="center"
+              mr="sm"
+            >
+              <ProgressCircle.Root indeterminate size={32} color="background">
+                <ProgressCircle.Indicator />
+              </ProgressCircle.Root>
             </View>
           ) : (
             suffix

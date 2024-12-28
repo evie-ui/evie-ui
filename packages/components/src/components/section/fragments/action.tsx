@@ -4,7 +4,7 @@ import { TextButton } from "../../text-button";
 type Props = React.ComponentProps<typeof TextButton>;
 
 export const SectionAction = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Section?.Action, _props, {
     h: "auto",
     w: "auto",
     px: "none",

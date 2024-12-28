@@ -1,4 +1,3 @@
-// import { SvgCheckCircleFill } from "@evie-ui/icons";
 // import { View } from "react-native";
 // import { useTheme } from "@evie-ui/hooks";
 // import { Icon } from "../icon";

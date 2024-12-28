@@ -4,7 +4,7 @@ import { View } from "../../view";
 type Props = React.ComponentProps<typeof View>;
 
 export const SectionContent = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Section?.Content, _props, {
     gap: "md",
   });
 

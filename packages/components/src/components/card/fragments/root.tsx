@@ -4,18 +4,14 @@ import { View } from "../../view";
 
 type Props = React.ComponentProps<typeof View>;
 
-export const CardRoot = forwardRef<React.ComponentRef<typeof View>, Props>((_props, ref) => {
-  const props = useComponentDefaults(_props, {
-    p: "lg",
-    gap: "md",
-    rounded: "md",
-    overflow: "hidden",
-    bgColor: "surface",
-  });
+export const CardRoot = forwardRef<React.ComponentRef<typeof View>, Props>(
+  (_props, ref) => {
+    const props = useComponentDefaults((t) => t.Card?.Root, _props);
 
-  return (
-    <View {...props} ref={ref}>
-      {props.children}
-    </View>
-  );
-});
+    return (
+      <View {...props} ref={ref}>
+        {props.children}
+      </View>
+    );
+  }
+);

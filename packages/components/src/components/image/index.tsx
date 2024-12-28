@@ -197,9 +197,7 @@ export const Image = forwardRef<Ref, Props>(({ children, ..._props }, ref) => {
   const [width, setWidth] = useState(2);
   const [aspectRatio, setAspectRatio] = useState(1);
 
-  const props = useComponentDefaults(_props, {
-    contentFit: "contain",
-  });
+  const props = useComponentDefaults((t) => t.Image, _props);
 
   const parsedBackgroundProps = parseBackgroundPropsType(props, theme);
   const parsedBorderProps = parseBorderPropsType(props, theme);

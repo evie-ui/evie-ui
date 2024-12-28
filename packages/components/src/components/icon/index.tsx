@@ -1,5 +1,11 @@
 import type { TODO } from "@evie-ui/types";
-import { Children, Fragment, cloneElement, isValidElement, useContext } from "react";
+import {
+  Children,
+  Fragment,
+  cloneElement,
+  isValidElement,
+  useContext,
+} from "react";
 import { StyleSheet } from "react-native";
 import { useComponentDefaults, useTheme } from "../../theme";
 import type { Text } from "../text";
@@ -11,15 +17,12 @@ export const Icon = ({ children, ..._props }: Props) => {
   const { theme } = useTheme();
   const parentTextProps = useContext(TextComponentContext);
 
-  const props = useComponentDefaults(
-    _props,
-    {
-      fontSize: "icon",
-      alignSelf: "center",
-      color: "onSurfaceVariant",
-    },
-    parentTextProps,
-  );
+  const props = useComponentDefaults<Props>((t) => ({}), _props, {
+    fontSize: "icon",
+    alignSelf: "center",
+    color: "onSurfaceVariant",
+    ...parentTextProps,
+  });
 
   const Component = Children.only(children ?? <Fragment />);
   if (!isValidElement(Component)) return <Fragment />;

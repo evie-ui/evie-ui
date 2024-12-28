@@ -22,7 +22,7 @@ const entrypoints = [
   "./src/components/page/index.ts",
   "./src/components/pressable/index.tsx",
   "./src/components/progress-bar/index.ts",
-  "./src/components/progress-circle/index.tsx",
+  "./src/components/progress-circle/index.ts",
   "./src/components/radio-group/index.ts",
   "./src/components/scrollview/index.tsx",
   "./src/components/section/index.ts",

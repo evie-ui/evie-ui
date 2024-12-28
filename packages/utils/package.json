@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "build": "bun run build.ts",
+    "build:prod": "NODE_ENV=production bun run build.ts",
     "clean": "rimraf dist",
     "test": "bun test",
     "test:watch": "bun test --watch"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@evie-ui/typescript-config": "*"
   },

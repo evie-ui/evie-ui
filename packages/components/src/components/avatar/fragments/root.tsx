@@ -1,30 +1,22 @@
-import { Children, isValidElement, useEffect, useState } from "react";
+import { Children, isValidElement, useState } from "react";
 import { useComponentDefaults } from "../../../theme";
 import { View } from "../../view";
 import { AvatarContext } from "../_context";
+import type { AvatarCurrentState, AvatarRootProps } from "../types";
 import { AvatarImage } from "./image";
 
-type CurrentState = React.ContextType<typeof AvatarContext>["currentState"];
-type Props = React.ComponentProps<typeof View>;
+export const AvatarRoot = (_props: AvatarRootProps) => {
+  const props = useComponentDefaults((t) => t.Avatar?.Root, _props);
 
-export const AvatarRoot = (_props: Props) => {
-  const [currentState, setCurrentState] = useState<CurrentState>("initial");
-  const props = useComponentDefaults(_props, {
-    size: 100,
-    rounded: "full",
-    fontSize: "title",
-    fontWeight: "bold",
-    bgColor: "surface",
-  });
-
-  useEffect(() => {
+  const [currentState, setCurrentState] = useState<AvatarCurrentState>(() => {
     const hasImageChildren = Children.toArray(props.children).some((child) => {
       if (!isValidElement(child)) return false;
       return child.type === AvatarImage;
     });
 
-    if (!hasImageChildren) setCurrentState("fallback");
-  }, [props.children]);
+    if (!hasImageChildren) return "fallback";
+    return "initial";
+  });
 
   return (
     <View
@@ -35,7 +27,9 @@ export const AvatarRoot = (_props: Props) => {
       justifyContent="center"
       textTransform="uppercase"
     >
-      <AvatarContext.Provider value={{ currentState, setCurrentState }}>{props.children}</AvatarContext.Provider>
+      <AvatarContext.Provider value={{ currentState, setCurrentState }}>
+        {props.children}
+      </AvatarContext.Provider>
     </View>
   );
 };

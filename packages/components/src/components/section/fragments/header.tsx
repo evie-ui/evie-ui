@@ -4,9 +4,8 @@ import { View } from "../../view";
 type Props = React.ComponentProps<typeof View>;
 
 export const SectionHeader = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Section?.Header, _props, {
     gap: "md",
-    px: "lg",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

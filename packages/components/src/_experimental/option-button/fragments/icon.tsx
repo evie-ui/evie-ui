@@ -8,7 +8,7 @@ type Props = React.ComponentProps<typeof View>;
 export const OptionButtonIcon = (_props: Props) => {
   const { isSelected } = useContext(OptionButtonContext);
 
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults(() => ({}), _props, {
     minH: 64,
     alignItems: "center",
     justifyContent: "center",

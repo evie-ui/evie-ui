@@ -1,15 +1,17 @@
 import { useContext } from "react";
 import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { View } from "../../view";
-import { AccordionContext } from "../_context";
+import { AccordionItemContext } from "../_context";
 
 type Props = React.ComponentProps<typeof View>;
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-export const AccordionContentFragment = (props: Props) => {
-  const { contentHeight, progress } = useContext(AccordionContext);
+export const AccordionContent = (props: Props) => {
+  const { contentHeight, progress } = useContext(AccordionItemContext);
 
-  const animatedHeight = useAnimatedStyle(() => ({ height: progress.value * contentHeight.value }));
+  const animatedHeight = useAnimatedStyle(() => ({
+    height: progress.value * contentHeight.value,
+  }));
 
   return (
     <AnimatedView {...props} overflow="hidden" style={animatedHeight}>

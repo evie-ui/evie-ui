@@ -1,9 +1,18 @@
 import { useBackButton } from "@evie-ui/hooks";
 import { useCallback, useImperativeHandle, useRef, useState } from "react";
 import { Dimensions, StyleSheet } from "react-native";
-import Animated, { LinearTransition, useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+  SlideInDown,
+  SlideOutDown,
+  useAnimatedStyle,
+  useSharedValue,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useKeyboardHeight } from "../../_experimental";
+import { useComponentDefaults } from "../../theme";
 import { ModalContext } from "../modal/_context";
 import { Pressable } from "../pressable";
 import { View } from "../view";
@@ -22,6 +31,8 @@ export const MagicModalPortal = () => {
   const insets = useSafeAreaInsets();
   const keyboardHeight = useKeyboardHeight();
   // const { height: keyboardHeight, progress: showKeyboardProgress } = useReanimatedKeyboardAnimation();
+
+  const props = useComponentDefaults((t) => t.MagicModal, {});
 
   const [Content, setContent] = useState<React.ComponentType | null>(null);
   const visible = useSharedValue(false);
@@ -43,7 +54,7 @@ export const MagicModalPortal = () => {
       visible.value = false;
       callbackRef.current(returns);
     },
-    [visible],
+    [visible]
   );
 
   const show = useCallback<IModal["show"]>(
@@ -60,7 +71,7 @@ export const MagicModalPortal = () => {
         callbackRef.current = resolve as ModalCallback;
       });
     },
-    [Content, visible],
+    [Content, visible]
   );
 
   const lock: IModal["lock"] = () => setCloseable(false);
@@ -85,15 +96,17 @@ export const MagicModalPortal = () => {
     }
   };
 
-  const animatedStyle = useAnimatedStyle(() => ({ pointerEvents: visible.value ? "auto" : "none" }));
+  const animatedStyle = useAnimatedStyle(() => ({
+    pointerEvents: visible.value ? "auto" : "none",
+  }));
 
   return (
     <AnimatedView {...StyleSheet.absoluteFillObject} style={animatedStyle}>
       {Content && (
         <AnimatedView
           {...StyleSheet.absoluteFillObject}
-          // entering={FadeIn.duration(IN_DURATION)}
-          // exiting={FadeOut.duration(OUT_DURATION)}
+          entering={FadeIn.duration(IN_DURATION)}
+          exiting={FadeOut.duration(OUT_DURATION)}
         >
           <Pressable
             opacity={0.8}
@@ -110,15 +123,13 @@ export const MagicModalPortal = () => {
           <AnimatedView
             left="sm"
             right="sm"
-            rounded="lg"
-            overflow="hidden"
-            position="absolute"
-            bgColor="background"
-            bottom={insets.bottom + keyboardHeight}
-            // entering={SlideInDown.duration(IN_DURATION)}
-            // exiting={SlideOutDown.duration(OUT_DURATION)}
-            layout={LinearTransition}
             maxH={Dimensions.get("window").height * 0.6}
+            {...props}
+            position="absolute"
+            bottom={insets.bottom + keyboardHeight}
+            entering={SlideInDown.duration(IN_DURATION)}
+            exiting={SlideOutDown.duration(OUT_DURATION)}
+            layout={LinearTransition}
           >
             <Content />
           </AnimatedView>

@@ -1,5 +1,9 @@
-import { objectDeepMerge, objectExtractKeysAndDeleteFromOriginal } from "@evie-ui/utils/object";
-import { forwardRef, useContext } from "react";
+import { usePrevious } from "@evie-ui/hooks";
+import {
+  objectDeepMerge,
+  objectExtractKeysAndDeleteFromOriginal,
+} from "@evie-ui/utils/object";
+import { forwardRef, useContext, useLayoutEffect } from "react";
 import { View as RNView } from "react-native";
 import {
   type BackgroundPropsType,
@@ -12,46 +16,19 @@ import {
   type RoundedPropsType,
   type ShadowPropsType,
   type SpacingPropsType,
-  type TextPropsType,
   type ThemeWithGetToken,
   type ZIndexPropsType,
-  backgroundProps,
-  borderProps,
-  dimensionProps,
-  flexProps,
   getFallbackColorBasedOnBgColor,
-  opacityProps,
-  overflowProps,
-  positionProps,
-  roundedProps,
-  spacingProps,
   textProps,
   useComponentDefaults,
   useTheme,
-  zIndexProps,
 } from "../../theme";
 import { TextComponentContext } from "../text";
-
-type BaseComponentProps = React.ComponentProps<typeof RNView>;
-type Props = BaseComponentProps &
-  BackgroundPropsType &
-  BorderPropsType &
-  DimensionPropsType &
-  FlexPropsType &
-  OpacityPropsType &
-  OverflowPropsType &
-  PositionPropsType &
-  ShadowPropsType &
-  RoundedPropsType &
-  SpacingPropsType &
-  ZIndexPropsType &
-  TextPropsType & {
-    ref?: React.ForwardedRef<React.ComponentRef<typeof RNView>>;
-  };
+import type { BaseComponentProps, ViewProps } from "./types";
 
 const parseShadowPropsType = <Props extends ShadowPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -65,7 +42,7 @@ const parseShadowPropsType = <Props extends ShadowPropsType>(
 
 const parseBackgroundPropsType = <Props extends BackgroundPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -76,7 +53,7 @@ const parseBackgroundPropsType = <Props extends BackgroundPropsType>(
 
 const parseBorderPropsType = <Props extends BorderPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -96,7 +73,7 @@ const parseBorderPropsType = <Props extends BorderPropsType>(
 };
 const parseDimensionPropsType = <Props extends DimensionPropsType>(
   props: Props,
-  _theme: ThemeWithGetToken,
+  _theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -112,7 +89,7 @@ const parseDimensionPropsType = <Props extends DimensionPropsType>(
 };
 const parseFlexPropsType = <Props extends FlexPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -132,7 +109,7 @@ const parseFlexPropsType = <Props extends FlexPropsType>(
 };
 const parseOpacityPropsType = <Props extends OpacityPropsType>(
   props: Props,
-  _theme: ThemeWithGetToken,
+  _theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -142,7 +119,7 @@ const parseOpacityPropsType = <Props extends OpacityPropsType>(
 };
 const parseOverflowPropsType = <Props extends OverflowPropsType>(
   props: Props,
-  _theme: ThemeWithGetToken,
+  _theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -152,7 +129,7 @@ const parseOverflowPropsType = <Props extends OverflowPropsType>(
 };
 const parsePositionPropsType = <Props extends PositionPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -166,7 +143,7 @@ const parsePositionPropsType = <Props extends PositionPropsType>(
 };
 const parseRoundedPropsType = <Props extends RoundedPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -193,7 +170,7 @@ const parseRoundedPropsType = <Props extends RoundedPropsType>(
 
 const parseSpacingPropsType = <Props extends SpacingPropsType>(
   props: Props,
-  theme: ThemeWithGetToken,
+  theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -217,7 +194,7 @@ const parseSpacingPropsType = <Props extends SpacingPropsType>(
 };
 const parseZIndexPropsType = <Props extends ZIndexPropsType>(
   props: Props,
-  _theme: ThemeWithGetToken,
+  _theme: ThemeWithGetToken
 ): Partial<BaseComponentProps> => {
   return {
     style: {
@@ -226,62 +203,84 @@ const parseZIndexPropsType = <Props extends ZIndexPropsType>(
   };
 };
 
-export const View = forwardRef<RNView, Props>(({ children, ..._props }, ref) => {
-  const { theme } = useTheme();
-  const _parentTextProps = useContext(TextComponentContext);
+export const View = forwardRef<RNView, ViewProps>(
+  ({ children, ..._props }, ref) => {
+    const { theme } = useTheme();
+    const _parentTextProps = useContext(TextComponentContext);
 
-  const props = useComponentDefaults(_props, {
-    color: getFallbackColorBasedOnBgColor(_props.bgColor),
-  });
+    const props = useComponentDefaults((t) => t.View, _props, {
+      color: getFallbackColorBasedOnBgColor(_props.bgColor),
+    });
 
-  const _textProps = objectExtractKeysAndDeleteFromOriginal(props, ...textProps);
+    const oldProps = usePrevious(props);
 
-  const parsedShadowProps = parseShadowPropsType(props, theme);
-  const parsedBackgroundProps = parseBackgroundPropsType(props, theme);
-  const parsedBorderProps = parseBorderPropsType(props, theme);
-  const parsedDimensionProps = parseDimensionPropsType(props, theme);
-  const parsedFlexProps = parseFlexPropsType(props, theme);
-  const parsedOpacityProps = parseOpacityPropsType(props, theme);
-  const parsedOverflowProps = parseOverflowPropsType(props, theme);
-  const parsedPositionProps = parsePositionPropsType(props, theme);
-  const parsedRoundedProps = parseRoundedPropsType(props, theme);
-  const parsedSpacingProps = parseSpacingPropsType(props, theme);
-  const parsedZIndexProps = parseZIndexPropsType(props, theme);
+    const _textProps = objectExtractKeysAndDeleteFromOriginal(
+      props,
+      ...textProps
+    );
 
-  objectExtractKeysAndDeleteFromOriginal(
-    props,
-    ...backgroundProps,
-    ...flexProps,
-    ...borderProps,
-    ...dimensionProps,
-    ...opacityProps,
-    ...overflowProps,
-    ...positionProps,
-    ...roundedProps,
-    ...spacingProps,
-    ...zIndexProps,
-  );
+    const parsedShadowProps = parseShadowPropsType(props, theme);
+    const parsedBackgroundProps = parseBackgroundPropsType(props, theme);
+    const parsedBorderProps = parseBorderPropsType(props, theme);
+    const parsedDimensionProps = parseDimensionPropsType(props, theme);
+    const parsedFlexProps = parseFlexPropsType(props, theme);
+    const parsedOpacityProps = parseOpacityPropsType(props, theme);
+    const parsedOverflowProps = parseOverflowPropsType(props, theme);
+    const parsedPositionProps = parsePositionPropsType(props, theme);
+    const parsedRoundedProps = parseRoundedPropsType(props, theme);
+    const parsedSpacingProps = parseSpacingPropsType(props, theme);
+    const parsedZIndexProps = parseZIndexPropsType(props, theme);
 
-  const finalProps = objectDeepMerge<BaseComponentProps>(
-    props,
-    parsedBackgroundProps,
-    parsedShadowProps,
-    parsedBorderProps,
-    parsedDimensionProps,
-    parsedFlexProps,
-    parsedOpacityProps,
-    parsedOverflowProps,
-    parsedPositionProps,
-    parsedRoundedProps,
-    parsedSpacingProps,
-    parsedZIndexProps,
-  );
+    const finalProps = objectDeepMerge<BaseComponentProps>(
+      props,
+      parsedBackgroundProps,
+      parsedShadowProps,
+      parsedBorderProps,
+      parsedDimensionProps,
+      parsedFlexProps,
+      parsedOpacityProps,
+      parsedOverflowProps,
+      parsedPositionProps,
+      parsedRoundedProps,
+      parsedSpacingProps,
+      parsedZIndexProps
+    );
 
-  const _finalTextProps = objectDeepMerge(_parentTextProps, _textProps);
+    const _finalTextProps = objectDeepMerge(_parentTextProps, _textProps);
 
-  return (
-    <RNView {...finalProps} ref={ref}>
-      <TextComponentContext.Provider value={_finalTextProps}>{children}</TextComponentContext.Provider>
-    </RNView>
-  );
-});
+    useLayoutEffect(() => {
+      if (oldProps.bgColor !== props.bgColor) {
+        // const newColor = theme.getColor(props.bgColor);
+        // if (newColor) {
+        //   finalProps.style = [
+        //     ...(finalProps.style),
+        //     {
+        //     backgroundColor: newColor,
+        //   }];
+        // }
+
+        console.log(
+          "bgColor changed from",
+          oldProps?.bgColor,
+          "to",
+          props.bgColor
+        );
+      }
+    });
+
+    return (
+      <RNView
+        {...finalProps}
+        ref={ref}
+        style={[
+          finalProps.style,
+          { backgroundColor: theme.getColor(props.bgColor) },
+        ]}
+      >
+        <TextComponentContext.Provider value={_finalTextProps}>
+          {children}
+        </TextComponentContext.Provider>
+      </RNView>
+    );
+  }
+);

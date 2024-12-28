@@ -4,9 +4,9 @@ import { Text } from "../../text";
 type Props = React.ComponentProps<typeof Text>;
 
 export const SectionTitle = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Section?.Title, _props, {
     fontWeight: "bold",
-    fontSize: "title",
+    fontSize: "section-title",
     fontFamily: "title",
   });
 

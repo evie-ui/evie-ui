@@ -14,7 +14,6 @@ const monorepoPackages = {
     '@evie-ui/hooks': path.resolve(monorepoRoot, 'packages/hooks'),
     '@evie-ui/utils': path.resolve(monorepoRoot, 'packages/utils'),
     '@evie-ui/sync': path.resolve(monorepoRoot, 'packages/sync'),
-    '@evie-ui/icons': path.resolve(monorepoRoot, 'packages/icons'),
     '@evie-ui/components': path.resolve(monorepoRoot, 'packages/components'),
   };
 

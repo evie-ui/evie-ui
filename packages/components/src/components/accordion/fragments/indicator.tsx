@@ -1,19 +1,19 @@
-import { SvgExpandMore } from "@evie-ui/icons/expand-more";
 import { useContext } from "react";
 import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { Icon } from "../../icon";
 import { View } from "../../view";
-import { AccordionContext } from "../_context";
+import { AccordionItemContext } from "../_context";
 
-type Props = React.ComponentProps<typeof View>;
+type Props = React.ComponentProps<typeof View> & {
+  children: React.ReactNode;
+};
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-export const AccordionIndicatorFragment = (props: Props) => {
-  const { contentHeight, progress } = useContext(AccordionContext);
+export const AccordionIndicator = (props: Props) => {
+  const { progress } = useContext(AccordionItemContext);
 
   const style = useAnimatedStyle(() => {
     const rotation = interpolate(
@@ -27,9 +27,7 @@ export const AccordionIndicatorFragment = (props: Props) => {
 
   return (
     <AnimatedView {...props} style={[style, props.style]}>
-      <Icon>
-        <SvgExpandMore />
-      </Icon>
+      {props.children}
     </AnimatedView>
   );
 };

@@ -1,4 +1,8 @@
-import type { LiteralUnion, Percentage } from "@evie-ui/types";
+import type {
+  LiteralUnion,
+  NamedFontFamilyWeight,
+  Percentage,
+} from "@evie-ui/types";
 import type { BoxShadowValue, TextStyle, ViewStyle } from "react-native";
 import type {
   Colors,
@@ -17,7 +21,7 @@ export type ThemePosition = LiteralUnion<
   Extract<keyof Spacings | Percentage, string>
 >;
 export type ThemeFontSize = LiteralUnion<Extract<keyof FontSizes, string>>;
-export type ThemeFontWeight = keyof FontFamilies[keyof FontFamilies];
+export type ThemeFontWeight = keyof NamedFontFamilyWeight;
 export type ThemeFontFamily = LiteralUnion<Extract<keyof FontFamilies, string>>;
 
 export const shadowProps = ["shadow"] as const;

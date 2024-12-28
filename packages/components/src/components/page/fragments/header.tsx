@@ -1,4 +1,3 @@
-import { SvgArrowBack } from "@evie-ui/icons/arrow-back";
 import { forwardRef, useContext } from "react";
 import Animated, {
   Easing,
@@ -13,7 +12,7 @@ import { View } from "../../view";
 import { PageScrollContext } from "../_context";
 
 type Props = React.ComponentProps<typeof View> & {
-  canGoBack?: boolean;
+  canGoBack?: () => boolean;
   onPressGoBack?: () => void;
 };
 const AnimatedView = Animated.createAnimatedComponent(View);
@@ -23,7 +22,7 @@ export const PageHeader = forwardRef<React.ComponentRef<typeof View>, Props>(
     const { translateY, lastContentOffset } = useContext(PageScrollContext);
     const { theme } = useTheme();
 
-    const props = useComponentDefaults(_props, {
+    const props = useComponentDefaults((t) => t.Page?.Header, _props, {
       left: 0,
       right: 0,
       zIndex: 1,
@@ -72,11 +71,9 @@ export const PageHeader = forwardRef<React.ComponentRef<typeof View>, Props>(
             gap="md"
             h={72}
           >
-            {canGoBack && (
+            {canGoBack?.() && (
               <Pressable onPress={onPressGoBack}>
-                <Icon fontSize={24}>
-                  <SvgArrowBack />
-                </Icon>
+                <Icon fontSize={24}>{/* <SvgArrowBack /> */}</Icon>
               </Pressable>
             )}
 

@@ -9,12 +9,6 @@ export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
 
-export function isNonNullable<TValue>(
-  value: TValue | undefined | null
-): value is TValue {
-  return value !== null && value !== undefined;
-}
-
 export type GenericObject = { [x: string]: unknown };
 
 export type MapKeys<T extends Map<unknown, unknown>> =
@@ -106,6 +100,57 @@ export type KeysMatchingType<T extends object, V> = {
   [K in keyof T]-?: T[K] extends V ? K : never;
 }[keyof T];
 
+export type DotNotation<T, V> = T extends V
+  ? ""
+  : {
+      [K in Extract<keyof T, string>]: DotNotationPath<K, DotNotation<T[K], V>>;
+    }[Extract<keyof T, string>];
+
+export type DotNotationPath<T extends string, U extends string> = "" extends U
+  ? T
+  : `${T}.${U}`;
+
+export type FontFamilyWeight = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+export type NamedFontFamilyWeight = {
+  thin: string;
+  extralight: string;
+  light: string;
+  regular: string;
+  medium: string;
+  semibold: string;
+  bold: string;
+  extrabold: string;
+  black: string;
+};
+
+type PickByDotNotation<T, K extends string> = {
+  [P in keyof T as P extends (K extends `${infer K0}.${string}` ? K0 : K)
+    ? P
+    : never]: P extends K
+    ? T[P]
+    : PickByDotNotation<
+        T[P],
+        K extends `${Exclude<P, symbol>}.${infer R}` ? R : never
+      >;
+} & {};
+
+export function isNonNullable<TValue>(
+  value: TValue | undefined | null
+): value is TValue {
+  return value !== null && value !== undefined;
+}
+
 export const isNumber = (token: unknown): token is number => {
   return typeof token === "number" && !Number.isNaN(token);
 };
@@ -126,3 +171,18 @@ export const isInvalid = (token: unknown): token is NullOrUndefined =>
 
 export const isPercentage = (token: unknown): token is Percentage =>
   typeof token === "string" ? token.endsWith("%") : false;
+
+export const parseDotNotation = <
+  Value extends GenericObject,
+  Path extends string,
+>(
+  value: Value,
+  path: Path
+): PickByDotNotation<Value, Path> => {
+  return path
+    .split(".")
+    .reduce((acc, key) => (acc as any)?.[key], value) as PickByDotNotation<
+    Value,
+    Path
+  >;
+};

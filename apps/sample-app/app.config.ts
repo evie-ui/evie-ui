@@ -42,10 +42,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       //     ],
       //   },
     ],
+    ["expo-dev-launcher", { launchMode: "launcher" }],
   ],
   experiments: {
     typedRoutes: true,
     tsconfigPaths: true,
-    // reactCanary: true,
+    reactCanary: true,
   },
 });

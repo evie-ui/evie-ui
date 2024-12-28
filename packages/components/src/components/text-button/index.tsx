@@ -26,20 +26,8 @@ export const TextButton = ({
   rightIcon,
   ..._props
 }: Props) => {
-  const props = useComponentDefaults(_props, {
-    h: 72,
-    w: "100%",
-    px: "lg",
-    gap: "sm",
-    bgColor: "primary",
+  const props = useComponentDefaults((t) => t.TextButton, _props, {
     color: getFallbackColorBasedOnBgColor(_props.bgColor),
-    fontSize: "button",
-    rounded: "md",
-    fontWeight: "bold",
-    textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    scaleDownAnimation: "soft",
   });
 
   const _textProps = objectExtractKeysAndDeleteFromOriginal(

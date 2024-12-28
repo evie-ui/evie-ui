@@ -1,26 +1,31 @@
 import { useEffect } from "react";
-import { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
+import {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from "react-native-reanimated";
 import { useComponentDefaults } from "../../../theme";
 import { View } from "../../view";
 import { ProgressBarContext } from "../_context";
-import type { DeterminateProps, IndeterminateProps } from "../_types";
+import type {
+  DeterminateProps,
+  IndeterminateProps,
+  ProgressBarRootProps,
+} from "../_types";
 
-type Props = React.ComponentProps<typeof View> & (DeterminateProps | IndeterminateProps);
-
-export const ProgressBarRoot = (_props: Props) => {
-  const props = useComponentDefaults(_props, {
-    h: 8,
-    rounded: "full",
-    overflow: "hidden",
-    bgColor: "surface",
-  });
+export const ProgressBarRoot = (_props: ProgressBarRootProps) => {
+  const { color, ...props } = useComponentDefaults<ProgressBarRootProps>(
+    (t) => t.ProgressBar?.Root,
+    _props
+  );
 
   const ContentParent: React.FC<React.PropsWithChildren> = props.indeterminate
     ? (Indeterminate as React.FC<React.PropsWithChildren>)
     : (Determinate as React.FC<React.PropsWithChildren>);
 
   return (
-    <View {...props}>
+    <View {...props} overflow="hidden" bgColor={color}>
       <ContentParent {...props}>{props.children}</ContentParent>
     </View>
   );
@@ -35,7 +40,11 @@ const Determinate = (props: DeterminateProps & React.PropsWithChildren) => {
 
   const style = useAnimatedStyle(() => ({ width: `${progressWidth.value}%` }));
 
-  return <ProgressBarContext.Provider value={{ style }}>{props.children}</ProgressBarContext.Provider>;
+  return (
+    <ProgressBarContext.Provider value={{ style }}>
+      {props.children}
+    </ProgressBarContext.Provider>
+  );
 };
 
 const Indeterminate = (props: IndeterminateProps & React.PropsWithChildren) => {
@@ -47,5 +56,9 @@ const Indeterminate = (props: IndeterminateProps & React.PropsWithChildren) => {
 
   const style = useAnimatedStyle(() => ({ left: `${translateX.value}%` }));
 
-  return <ProgressBarContext.Provider value={{ style }}>{props.children}</ProgressBarContext.Provider>;
+  return (
+    <ProgressBarContext.Provider value={{ style }}>
+      {props.children}
+    </ProgressBarContext.Provider>
+  );
 };

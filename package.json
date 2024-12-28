@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build",
+    "build:prod": "turbo run build:prod",
     "clean": "turbo run clean",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
   },
@@ -12,7 +13,7 @@
     "rimraf": "6.0.1",
     "turbo": "2.3.3",
     "typescript": "5.7.2",
-    "oxc-parser": "0.40.1"
+    "oxc-parser": "0.41.0"
   },
   "name": "with-react-native",
   "packageManager": "bun@1.1.38",

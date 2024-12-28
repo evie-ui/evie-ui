@@ -1,24 +1,19 @@
 import { forwardRef } from "react";
 import { useComponentDefaults } from "../../theme";
-import { Icon } from "../icon";
 import { Pressable } from "../pressable";
+import { View } from "../view";
 
 type Props = React.ComponentProps<typeof Pressable>;
 type Ref = React.ComponentRef<typeof Pressable>;
 
-export const IconButton = forwardRef<Ref, Props>(({ children, ..._props }, ref) => {
-  const props = useComponentDefaults(_props, {
-    size: 72,
-    rounded: "md",
-    alignItems: "center",
-    justifyContent: "center",
-    aspectRatio: 1,
-    scaleDownAnimation: "hard",
-  });
+export const IconButton = forwardRef<Ref, Props>(
+  ({ children, ..._props }, ref) => {
+    const props = useComponentDefaults((t) => t.IconButton, _props);
 
-  return (
-    <Pressable {...props} ref={ref}>
-      <Icon opacity={props.loading ? 0 : 1}>{children}</Icon>
-    </Pressable>
-  );
-});
+    return (
+      <Pressable {...props} ref={ref}>
+        <View opacity={props.loading ? 0 : 1}>{children}</View>
+      </Pressable>
+    );
+  }
+);

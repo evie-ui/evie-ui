@@ -8,13 +8,14 @@ type Props = React.ComponentProps<typeof ScrollView>;
 type Ref = React.ComponentRef<typeof ScrollView>;
 
 export const PageContent = forwardRef<Ref, Props>((_props, ref) => {
-  const { translateY, isScrolling, lastContentOffset } = useContext(PageScrollContext);
+  const { translateY, isScrolling, lastContentOffset } =
+    useContext(PageScrollContext);
 
-  const props = useComponentDefaults(_props, {
+  const props = useComponentDefaults((t) => t.Page?.Content, _props, {
     pt: 80,
     flex: 1,
     pb: 140,
-    px: "md",
+    px: "lg",
     gap: "md",
     bounces: false,
     overflow: "hidden",
@@ -34,7 +35,9 @@ export const PageContent = forwardRef<Ref, Props>((_props, ref) => {
           }
         }
 
-        lastContentOffset.value = NumberHelpers.clamp(event.contentOffset.y, { min: 0 });
+        lastContentOffset.value = NumberHelpers.clamp(event.contentOffset.y, {
+          min: 0,
+        });
       }}
       onScrollBeginDrag={() => {
         isScrolling.value = true;

@@ -1,13 +1,16 @@
 import type { Progress } from "@evie-ui/types";
-import type { View } from "../view";
+import type { ThemeColors, ThemeSpacing } from "../../theme";
 
-type BaseProps = Pick<
-  React.ComponentProps<typeof View>,
-  "bgColor" | "color"
-> & { size?: number };
-
-export type IndeterminateProps = BaseProps & { indeterminate: true };
-export type DeterminateProps = BaseProps & {
-  indeterminate?: false;
-  progress: Progress;
+type BaseProps = React.PropsWithChildren & {
+  size?: ThemeSpacing;
+  color?: ThemeColors;
+  thickness?: number;
 };
+
+export type IndeterminateProps = { indeterminate: true };
+export type DeterminateProps = { indeterminate?: false; progress: Progress };
+
+export type ProgressCircleRootProps = BaseProps &
+  (DeterminateProps | IndeterminateProps);
+
+export type ProgressCircleIndicatorProps = { color?: ThemeColors };

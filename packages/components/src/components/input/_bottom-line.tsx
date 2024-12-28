@@ -1,6 +1,11 @@
 import type { TODO } from "@evie-ui/types";
 import { useContext, useEffect } from "react";
-import Animated, { interpolateColor, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+  interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { useTheme } from "../../theme";
 import { FormControlContext } from "../form-control/_context";
 import { View } from "../view";
@@ -18,9 +23,9 @@ export const BottomLine = ({ children, focused, ..._props }: Props) => {
   const lastAnimationProgress = useSharedValue(0);
 
   const colors = {
-    color1: theme.getColor(props.bgColor),
-    color2: theme.getColor(props.borderColor),
-    color3: theme.getColor("error"),
+    color1: theme.getColor(props.bgColor)!,
+    color2: theme.getColor(props.borderColor)!,
+    color3: theme.getColor("error")!,
   };
 
   const underlineColorStyle = useAnimatedStyle(() => {
@@ -28,7 +33,7 @@ export const BottomLine = ({ children, focused, ..._props }: Props) => {
       backgroundColor: interpolateColor(
         animationProgress.value,
         [0, 1, 2],
-        [colors.color1, colors.color2, colors.color3],
+        [colors.color1, colors.color2, colors.color3]
       ),
     };
   });
@@ -47,7 +52,14 @@ export const BottomLine = ({ children, focused, ..._props }: Props) => {
     <View overflow="hidden" rounded="md" flexGrow={1}>
       {children}
 
-      <AnimatedView position="absolute" bottom={0} left={0} right={0} h={3} style={underlineColorStyle} />
+      <AnimatedView
+        position="absolute"
+        bottom={0}
+        left={0}
+        right={0}
+        h={3}
+        style={underlineColorStyle}
+      />
     </View>
   );
 };
